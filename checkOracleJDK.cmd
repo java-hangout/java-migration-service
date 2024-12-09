@@ -3,7 +3,7 @@ SETLOCAL ENABLEDELAYEDEXPANSION
 
 :: Step 1: Check if Java is installed and determine its version
 echo Checking if Java is installed...
-check
+
 :: Check if java is available in the path
 where java > nul 2>&1
 IF %ERRORLEVEL% NEQ 0 (
@@ -23,33 +23,36 @@ echo Checking if Oracle JDK is installed...
 
 :: Look for Oracle JDK specific strings in the version output
 echo %java_version% | findstr /i "Oracle" > nul
+IF %ERRORLEVEL% EQU 0 (
+    echo Oracle JDK detected. Proceeding to uninstall Oracle JDK...
+
+    :: Search for the Oracle JDK uninstaller in the registry
+    for /f "tokens=3" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall" /s /f "Oracle JDK" ^| findstr "UninstallString"') do (
+        set uninstall_command=%%a
+    )
+
+    IF NOT "!uninstall_command!"=="" (
+        echo Uninstalling Oracle JDK using: !uninstall_command!
+        "!uninstall_command!" /quiet /norestart
+    ) ELSE (
+        echo Oracle JDK uninstaller not found. You may need to manually uninstall Oracle JDK.
+    )
+)
+
+:: Step 3: Check if OpenJDK is already installed
+echo Checking if OpenJDK is installed...
+
+:: Search for OpenJDK in the system
+where java > nul 2>&1
 IF %ERRORLEVEL% NEQ 0 (
-    echo Oracle JDK not detected. Exiting script.
-    goto end
+    echo Java (OpenJDK) is not installed. Proceeding to install OpenJDK...
+    goto install_openjdk
 )
 
-:: Step 3: Uninstall Oracle JDK (based on version and platform)
-echo Oracle JDK detected. Proceeding to uninstall Oracle JDK...
+:: If OpenJDK is already installed, do nothing
+echo OpenJDK is already installed. Skipping installation.
 
-:: For Windows, Oracle JDK is usually installed via an MSI or EXE installer. 
-:: The uninstallation command may vary. Here we assume it's installed via an MSI package.
-:: Attempt to uninstall using the uninstall string from the registry (example path):
-echo Looking for Oracle JDK Uninstaller...
-
-:: Search for the Oracle JDK uninstaller in the registry
-for /f "tokens=3" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall" /s /f "Oracle JDK" ^| findstr "UninstallString"') do (
-    set uninstall_command=%%a
-)
-
-IF NOT "%uninstall_command%"=="" (
-    echo Uninstalling Oracle JDK using: !uninstall_command!
-    "!uninstall_command!" /quiet /norestart
-) ELSE (
-    echo Oracle JDK uninstaller not found. You may need to manually uninstall Oracle JDK.
-)
-
-:: Continue to OpenJDK installation
-goto install_openjdk
+goto end
 
 :: Step 4: Install OpenJDK
 :install_openjdk
