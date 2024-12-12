@@ -1,0 +1,37 @@
+Uninstallation Log 
+===================== 
+Log generated on: 12/12/2024 10:45:14.94 
+===================== 
+Checking if Java is installed... 
+Java is installed. Now checking if it's Oracle Java... 
+Checking for Oracle Java installation in the 64-bit registry... 
+Checking if Oracle Java is in the 64-bit registry... 
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{26A24AE4-039D-4CA4-87B4-2F64180191F0}
+    InstallSource    REG_SZ    C:\Users\HP\AppData\LocalLow\Oracle\Java\jre1.8.0_191_x64\
+    Publisher    REG_SZ    Oracle Corporation
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{64A3A4F4-B792-11D6-A78A-00B0D0180191}
+    InstallSource    REG_SZ    C:\Users\HP\AppData\LocalLow\Oracle\Java\jdk1.8.0_191_x64\
+    Publisher    REG_SZ    Oracle Corporation
+    URLUpdateInfo    REG_SZ    https://www.oracle.com/technetwork/java/javase/downloads
+
+End of search: 5 match(es) found.
+Checking for Oracle Java installation in the 32-bit registry... 
+Checking if Oracle Java is in the 32-bit registry... 
+
+HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{4A03706F-666A-4037-7777-5F2748764D10}
+    InstallSource    REG_SZ    C:\Users\HP\AppData\LocalLow\Oracle\Java\jre1.8.0_191_x64\
+    Publisher    REG_SZ    Oracle Corporation
+
+End of search: 2 match(es) found.
+Looking for uninstall commands... 
+If uninstall string is missing, attempting to uninstall via msiexec... 
+Trying to uninstall Java using GUID: {26A24AE4-039D-4CA4-87B4-2F64180191F0} 
+Oracle Java has been uninstalled successfully using GUID: {26A24AE4-039D-4CA4-87B4-2F64180191F0} 
+Trying to uninstall Java using GUID: {64A3A4F4-B792-11D6-A78A-00B0D0180191} 
+Oracle Java has been uninstalled successfully using GUID: {64A3A4F4-B792-11D6-A78A-00B0D0180191} 
+Trying to uninstall Java using GUID: {4A03706F-666A-4037-7777-5F2748764D10} 
+Oracle Java has been uninstalled successfully using GUID: {4A03706F-666A-4037-7777-5F2748764D10} 
+Script execution completed. 
+===================== 
